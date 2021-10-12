@@ -1,0 +1,24 @@
+{
+    "name": "michaeldrennen/envoyer-api",
+    "description": "A client library for the envoyer.io API.",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Michaeldrennen\\EnvoyerApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "michaeldrennen",
+            "email": "michaeldrennen74@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^7.3"
+    }
+}
