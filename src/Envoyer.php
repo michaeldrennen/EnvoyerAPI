@@ -3,6 +3,7 @@
 namespace MichaelDrennen\EnvoyerAPI;
 
 use GuzzleHttp\Client;
+use MichaelDrennen\EnvoyerAPI\Models\Heartbeat;
 
 class Envoyer {
 
@@ -67,7 +68,13 @@ class Envoyer {
     }
 
 
-    public function heartbeats(string $projectId) {
-        return $this->sendRequest('projects/' . $projectId . '/heartbeats', [], null);
+    public function heartbeats(string $projectId): array {
+        $heartbeatsFromAPI = $this->sendRequest('projects/' . $projectId . '/heartbeats', [], 'heartbeats');
+
+        $heartbeats = [];
+        foreach($heartbeatsFromAPI as $heartbeatFromAPI):
+            $heartbeats[] = new Heartbeat($heartbeatFromAPI);
+        endforeach;
+        return $heartbeats;
     }
 }
