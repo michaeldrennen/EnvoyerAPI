@@ -30,5 +30,6 @@
     </logging>
     <php>
         <env name="API_KEY" value="YourAPIKeyFromEnvoyer"/>
+        <env name="PROJECT_ID" value="12345"/>
     </php>
 </phpunit>

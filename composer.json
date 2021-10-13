@@ -8,7 +8,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Michaeldrennen\\EnvoyerApi\\": "src/"
+            "MichaelDrennen\\EnvoyerAPI\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MichaelDrennen\\EnvoyerAPI\\Tests\\": "tests"
         }
     },
     "authors": [

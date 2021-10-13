@@ -10,7 +10,7 @@ class Envoyer {
     protected $client;
     protected $headers = [];
 
-    const BASE_URI = 'https://envoyer.io/api';
+    const BASE_URI = 'https://envoyer.io/api/';
     const TIMEOUT  = 10;
 
     public function __construct( string $API_KEY ) {
@@ -34,13 +34,40 @@ class Envoyer {
     }
 
 
-    public function projects(){
+    protected function sendRequest( string $path, array $query = [], string $key = null ) {
         $options = [
-            'headers' => $this->headers
+            'headers' => $this->headers,
         ];
 
-        $response = $this->client->get('projects',$options);
+        if( !empty($query)):
+            $options['query'] = $query;
+        endif;
 
-        var_dump($response->getBody());
+        $response = $this->client->get( $path, $options );
+
+        $string = (string)$response->getBody();
+        $array  = json_decode( $string, TRUE );
+
+        if($key):
+            return $array[$key];
+        endif;
+
+        return $array;
+    }
+
+    public function projects() {
+        return $this->sendRequest('projects',[],  'projects');
+    }
+
+    public function environment(string $projectId) {
+        $query = [
+            'key' => 'APP_NAME'
+        ];
+        return $this->sendRequest('projects/' . $projectId . '/environment', $query, null);
+    }
+
+
+    public function heartbeats(string $projectId) {
+        return $this->sendRequest('projects/' . $projectId . '/heartbeats', [], null);
     }
 }
